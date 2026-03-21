@@ -35,7 +35,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg); ;color: var(--text-dark); line-height: 1.6; }
 
 .top-banner { width: 100%; padding: 0; background: var(--bg-white); }
 .banner-img { width: 100%; min-height: 15vw; ; background-image: url(Images/banner.png); background-size: cover;justify-content: center;}
