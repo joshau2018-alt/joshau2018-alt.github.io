@@ -38,7 +38,7 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
 .top-banner { width: 100%; padding: 0; background: var(--bg-white); }
-.banner-img { width: 100%; min-height: 140px; margin: 0; background-image: url(Images/ServicesImg.png);}
+.banner-img { width: 100%; min-height: 15vw; ; background-image: url(Images/banner.png); background-size: cover;justify-content: center;}
 
 .header { position: sticky; top: 0; z-index: 100; background: var(--bg-white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 .header-container { max-width: 1200px; margin: 0 auto; padding: var(--space-md) var(--space-lg); display: flex; align-items: center; justify-content: space-between; height: 80px; }
