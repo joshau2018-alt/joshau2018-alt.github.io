@@ -38,7 +38,7 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
 .top-banner { width: 100%; padding: 0; background: var(--bg-white); }
-.banner-img { width: 100%; min-height: 120px; margin: 0; }
+.banner-img { width: 100%; min-height: 140px; margin: 0; background-image: url(Images/ServicesImg.png);}
 
 .header { position: sticky; top: 0; z-index: 100; background: var(--bg-white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 .header-container { max-width: 1200px; margin: 0 auto; padding: var(--space-md) var(--space-lg); display: flex; align-items: center; justify-content: space-between; height: 80px; }
@@ -67,7 +67,7 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
 .hero-left { display: flex; align-items: stretch; }
 .hero-right { display: flex; flex-direction: column; }
 
-.img-placeholder { background: var(--placeholder-bg); border: 2px solid var(--text-dark); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-dark); font-size: 1.25rem; min-height: 250px; width: 100%; }
+.img-placeholder { background: var(--placeholder-bg); border: 2px solid var(--text-dark); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-dark); font-size: 1.25rem; min-height: 250px; width: 100%; min-width: 200p}
 .img-placeholder.large { min-height: 300px; max-width: 100%; background-color: transparent;}
 .img-placeholder.banner-img { border: none; border-radius: 0; min-height: 120px; }
 
