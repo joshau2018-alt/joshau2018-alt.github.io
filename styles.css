@@ -61,16 +61,15 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
 .hamburger.active span:nth-child(2) { width: 24px; }
 .hamburger.active span:nth-child(3) { transform: rotate(45deg) translateY(-2px); width: 14px; }
 
-.main-content { max-width: 1200px; margin: 0 auto; }
+.main-content { max-width: 100%; margin: 0 auto; }
 
 .hero-section { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); padding: var(--space-xl) var(--space-lg); }
 .hero-left { display: flex; align-items: stretch; }
 .hero-right { display: flex; flex-direction: column; }
 
 .img-placeholder { background: var(--placeholder-bg); border: 2px solid var(--text-dark); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-dark); font-size: 1.25rem; min-height: 250px; width: 100%; }
-.img-placeholder.large { min-height: 300px; }
+.img-placeholder.large { min-height: 300px; max-width: 100%; background-color: transparent;}
 .img-placeholder.banner-img { border: none; border-radius: 0; min-height: 120px; }
-.img-placeholder.footer-img { min-height: 150px; }
 
 /* Text box — column layout, button pinned to bottom */
 .text-content {
@@ -117,12 +116,26 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
     gap: 14px;
 }
 
+/* Bacxkground imagge and text section */
+.b-image-section{
+    background-image: url('Images/coolTruck.jpg');
+    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover; /* Ensures the image covers the entire container while maintaining aspect ratio */
+    background-position: center; /* Centers the image within the container */
+    /* Define a minimum height so the container is visible even if content is sparse */
+    height: 400px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 /* Full-width image section */
 .full-image-section {
-    width: 100%;
+    max-width: 100%;
     padding: 0;
     margin-bottom: 0;
     overflow: hidden;
+    width: 100%;
 }
 
 .full-image-section .img-placeholder {
@@ -134,15 +147,14 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
 
 /* Full-width text section spanning entire screen */
 .full-width-text-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
     padding: var(--space-xl) var(--space-lg);
-    background: var(--primary);
-    margin-top: 0;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    height: 20vh;
+   
 }
 
 .full-width-text-section .text-content {
@@ -181,7 +193,7 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
 .footer-right { display: flex; align-items: flex-start; justify-content: flex-end; }
 .info-box { background: var(--bg-white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; font-weight: 600; color: var(--text-dark); min-height: 150px; display: flex; align-items: center; justify-content: center; width: 100%; }
 
-@media (max-width: 768px) {
+@media (max-width: 100%) {
     .header-container { padding: var(--space-md); height: auto; }
 
     /* Keep company name visible but smaller */
@@ -204,7 +216,7 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
     .hero-section, .content-row, .bottom-content-section { grid-template-columns: 1fr; gap: var(--space-md); padding: var(--space-lg) var(--space-md); }
     .footer-content { grid-template-columns: 1fr; gap: var(--space-md); }
     .full-image-section { padding: 0; margin-bottom: 0; }
-    .full-image-section .img-placeholder { height: 250px; }
+    .full-image-section .img-placeholder { height: 250px; width: 100vh; }
     .full-width-text-section { padding: var(--space-lg) var(--space-md); margin-top: 0; min-height: 250px; }
     .hero-left, .hero-right, .content-left, .content-right, .footer-left, .footer-center, .footer-right { display: flex; flex-direction: column; }
     .img-placeholder { min-height: 200px; }
@@ -213,7 +225,7 @@ body { font-family: var(--font-body); background-color: var(--bg-light); color: 
     .info-box { min-height: 120px; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 100%) {
     .header-container { padding: var(--space-sm) var(--space-md); }
     .logo { font-size: 1rem; padding: var(--space-xs) var(--space-sm); min-width: 60px; }
     .hero-section, .content-row, .bottom-content-section { padding: var(--space-lg) var(--space-md); }
