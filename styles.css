@@ -75,6 +75,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     align-items: stretch;
     width: 100%;
     padding: 4% 0;
+    height: 100%;
    
 }
 
