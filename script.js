@@ -100,13 +100,14 @@ const skipLink = document.createElement('a');
 skipLink.href = '#main-content';
 skipLink.textContent = 'Skip to main content';
 skipLink.style.cssText = `
-    position: absolute;
-    top: -40px;
+    position: fixed;
+    top: -100px;
     left: 0;
     background: var(--primary, #6366f1);
     color: white;
     padding: 8px;
-    z-index: 100;
+    z-index: 9999;
+    transition: top 200ms ease;
 `;
 
 skipLink.addEventListener('focus', () => {
@@ -114,7 +115,7 @@ skipLink.addEventListener('focus', () => {
 });
 
 skipLink.addEventListener('blur', () => {
-    skipLink.style.top = '-40px';
+    skipLink.style.top = '-100px';
 });
 
 document.body.insertBefore(skipLink, document.body.firstChild);

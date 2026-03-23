@@ -34,16 +34,18 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; border: none; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg); ;color: var(--text-dark); line-height: 1.6; }
+body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg); color: var(--text-dark); line-height: 1.6; }
 
 .top-banner { width: 100%; padding: 0; background: var(--bg-white); }
-.banner-img { width: 100%; min-height: 15vw; ; background-image: url(Images/banner.png); background-size: cover;justify-content: center;}
+.banner-img { width: 100%; min-height: 15vw; background-image: url(Images/banner.png); background-size: cover; justify-content: center; display: block; border: none; outline: none; }
 
 .header { position: sticky; top: 0; z-index: 100; background: var(--bg-white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-.header-container { max-width: 1200px; margin: 0 auto; padding: var(--space-md) var(--space-lg); display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.header-container { max-width: 100%; margin: 0 auto; padding: var(--space-md) var(--space-lg); display: flex; align-items: center; justify-content: space-between; height: 80px; }
 .logo { font-weight: 700; font-size: 1.25rem; color: var(--text-dark); padding: var(--space-sm) var(--space-md); border: 2px solid var(--text-dark); border-radius: var(--radius-md); background: var(--bg-white); min-width: 80px; text-align: center; }
-.company-name { font-weight: 600; font-size: 1rem; color: var(--text-dark); letter-spacing: 0.05em; flex: 1; text-align: center; }
+.company-name { font-weight: 670; font-size: 3vw
+    ; color: var(--text-dark); front: s;letter-spacing: 0.05em; flex: 1; text-align: center;}
 
 .nav-menu { position: relative; display: flex; align-items: center; }
 .dropdown-btn { display: none; }
@@ -63,17 +65,119 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 
 .main-content { max-width: 100%; margin: 0 auto; }
 
-.hero-section { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); padding: var(--space-xl) var(--space-lg); }
-.hero-left { display: flex; align-items: stretch; }
-.hero-right { display: flex; flex-direction: column; }
+/* ============================================
+   HERO SECTION — image left, text right, flush side by side
+   ============================================ */
+.hero-section {
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    padding: 4% 0;
+   
+}
 
-.img-placeholder { background: var(--placeholder-bg); border: 2px solid var(--text-dark); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-dark); font-size: 1.25rem; min-height: 250px; width: 100%; min-width: 200p}
-.img-placeholder.large { min-height: 300px; max-width: 100%; background-color: transparent;}
-.img-placeholder.banner-img { border: none; border-radius: 0; min-height: 120px; }
+/* Image takes up the left 60% */
+.hero-left {
+    flex: 0 0 60%;
+    overflow: hidden;
+}
 
-/* Text box — column layout, button pinned to bottom */
+.hero-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Fallback for .img-placeholder if still used */
+.hero-left .img-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border-radius: 0;
+    border: none;
+    
+}
+
+/* Text box fills the right 40%, same height as the image */
+.hero-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.hero-right .text-content {
+    flex: 1;
+    border-radius: 0;
+    border-color: rgb(0,0,0,0);
+    border-left: none;
+    min-height: unset;
+    padding: var(--space-xl) var(--space-lg);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    font-weight: 670;
+    
+
+}
+
+/* ============================================
+   Bottom SECTION — text left, img right, flush side by side
+   ============================================ */
+.bottom-content-section {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    padding: 4% 0;
+}
+
+/* Text fills the left 40% */
+.bottom-content-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-content-left .text-content {
+    flex: 1;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    min-height: unset;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    font-weight: 670;
+}
+
+/* Image takes up the right 60% */
+.bottom-content-right {
+    flex: 0 0 60%;
+    overflow: hidden;
+}
+
+.bottom-content-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ============================================
+   TEXT BOXES
+   ============================================ */
 .text-content {
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, );   /* slightly translucent so the image peeks through */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 2px solid var(--border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
@@ -85,6 +189,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     justify-content: space-between;
     align-items: flex-start;
     min-height: 200px;
+    box-shadow: var(--shadow-lg);
 }
 
 .text-content.footer-text { min-height: 150px; }
@@ -116,19 +221,19 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     gap: 14px;
 }
 
-/* Bacxkground imagge and text section */
-.b-image-section{
+/* Background image and text section */
+.b-image-section {
     background-image: url('Images/coolTruck.jpg');
-    background-repeat: no-repeat; /* Prevents the image from tiling */
-    background-size: cover; /* Ensures the image covers the entire container while maintaining aspect ratio */
-    background-position: center; /* Centers the image within the container */
-    /* Define a minimum height so the container is visible even if content is sparse */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 40vw;
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
 }
+
 /* Full-width image section */
 .full-image-section {
     max-width: 100%;
@@ -148,14 +253,13 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 /* Full-width text section spanning entire screen */
 .full-width-text-section {
     width: 100%;
-    margin-top: 10%;
+    margin-top: 0;
     padding: var(--space-xl) var(--space-lg);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 10vw;
-   
 }
 
 .full-width-text-section .text-content {
@@ -165,6 +269,9 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     max-width: 1200px;
     margin: 0 auto;
     min-height: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
 }
 
 .full-width-text-section .text-content,
@@ -181,26 +288,31 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 .content-right { display: flex; align-items: stretch; }
 .content-right .img-placeholder { width: 100%; }
 
-.bottom-content-section { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); padding: var(--space-xl) var(--space-lg); }
 .bottom-content-section .img-placeholder { width: 100%; align-self: stretch; }
 .text-area { display: flex; flex-direction: column; }
 
-.footer { background: var(--bg-white); border-top: 2px solid var(--border); padding: var(--space-xl) var(--space-lg); margin-top: var(--space-xl); }
-.footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-lg); align-items: flex-start; }
-.footer-left { display: flex; align-items: flex-start; }
-.footer-left .img-placeholder { width: 100%; }
-.footer-center { display: flex; align-items: flex-start; justify-content: center; }
-.footer-center .text-content { width: 100%; }
-.footer-right { display: flex; align-items: flex-start; justify-content: flex-end; }
-.info-box { background: var(--bg-white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; font-weight: 600; color: var(--text-dark); min-height: 150px; display: flex; align-items: center; justify-content: center; width: 100%; }
+/* Generic image placeholder (non-hero) */
+.img-placeholder { background: var(--placeholder-bg); border: 2px solid var(--text-dark); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-dark); font-size: 1.25rem; min-height: 250px; width: 100%; }
 
-@media (max-width: 100%) {
+.footer { background-image: url("Images/krzysztof-kowalik-ciyfSzBmaKU-unsplash.jpg"); background-color: rgba(0, 0, 0, 0.67); background-blend-mode: multiply; background-size: cover; border-top: 2px solid var(--border); padding: var(--space-xl) var(--space-lg); margin-top: var(--space-xl); }
+.footer-content { max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-md); }
+
+/* Top shelf — map left, text right, side by side */
+.footer-top-shelf { display: flex; flex-direction: row; gap: var(--space-lg); align-items: stretch; width: 100%; }
+
+.footer-left { flex: 0 0 50%; display: flex; min-height: 300px; }
+.footer-left iframe { width: 100%; height: 100%; min-height: 300px; display: block; border: none; }
+
+.footer-center { flex: 1; display: flex; }
+.footer-center .text-content { width: 100%; min-height: unset; }
+
+/* Bottom shelf — info box full width */
+.footer-right { width: 100%; display: flex; }
+.info-box { width: 100%; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-lg); padding: var(--space-lg); font-weight: 600; color: var(--bg-white); min-height: unset; display: flex; align-items: center; justify-content: center; }
+
+@media (max-width: 768px) {
     .header-container { padding: var(--space-md); height: auto; }
-
-    /* Keep company name visible but smaller */
     .company-name { font-size: 5vw; letter-spacing: 0.02em; }
-
-    /* Dropdown spans full width, aligns flush below the header */
     .nav-menu { position: static; }
     .dropdown-content {
         position: fixed;
@@ -214,23 +326,87 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
         box-shadow: var(--shadow-md);
     }
 
-    .hero-section, .content-row, .bottom-content-section { grid-template-columns: 1fr; gap: var(--space-md); padding: var(--space-lg) var(--space-md); }
-    .footer-content { grid-template-columns: 1fr; gap: var(--space-md); }
+    /* Stack hero vertically on mobile */
+    .hero-section {
+        flex-direction: column;
+    }
+
+    .hero-left {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-right {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-right .text-content {
+        border-left: 2px solid var(--border);
+        border-top: none;
+        padding: var(--space-lg) var(--space-md);
+        
+    }
+
+    .content-row { grid-template-columns: 1fr; gap: var(--space-md); padding: var(--space-lg) var(--space-md); }
+
+    /* Stack bottom section: image on top, text below on mobile */
+    .bottom-content-section {
+        flex-direction: column;
+        padding: 4% 0;
+        margin: 0;
+        gap: 0;
+    }
+
+    .bottom-content-right {
+        flex: none;
+        width: 100%;
+        height: 60vw;
+        min-height: unset;
+        order: 1;
+        margin: 0;
+        padding: 0;
+    }
+
+    .bottom-content-right img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .bottom-content-left {
+        flex: none;
+        width: 100%;
+        order: 2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .bottom-content-left .text-content {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        padding: var(--space-lg) var(--space-md);
+    }
+    .footer-content { gap: var(--space-sm); }
+    .footer-top-shelf { flex-direction: column; }
+    .footer-left { flex: none; width: 100%; min-height: 250px; }
+    .footer-left iframe { min-height: 250px; }
+    .footer-center { flex: none; width: 100%; }
     .full-image-section { padding: 0; margin-bottom: 0; }
-    .full-image-section .img-placeholder { height: 250px; width: 100vh; }
-    .full-width-text-section { padding: var(--space-lg) var(--space-md); margin-top: 0; min-height: 250px; }
-    .hero-left, .hero-right, .content-left, .content-right, .footer-left, .footer-center, .footer-right { display: flex; flex-direction: column; }
+    .full-image-section .img-placeholder { height: 250px; width: 100%; }
+    .full-width-text-section { padding: var(--space-lg) var(--space-md); margin-top: 0; min-height: 250px; height: auto; }
+    .hero-left, .content-left, .content-right, .footer-left, .footer-center, .footer-right { display: flex; flex-direction: column; }
     .img-placeholder { min-height: 200px; }
-    .img-placeholder.large { min-height: 200px; }
     .text-content { min-height: 150px; }
     .info-box { min-height: 120px; }
 }
 
-@media (max-width: 100%) {
+@media (max-width: 480px) {
     .header-container { padding: var(--space-sm) var(--space-md); }
     .logo { font-size: 1rem; padding: var(--space-xs) var(--space-sm); min-width: 60px; }
-    .hero-section, .content-row, .bottom-content-section { padding: var(--space-lg) var(--space-md); }
-    .full-image-section { padding: 0; }
     .full-image-section .img-placeholder { height: 200px; }
     .full-width-text-section { padding: var(--space-lg) var(--space-md); min-height: 200px; }
     .footer { padding: var(--space-lg) var(--space-md); }
