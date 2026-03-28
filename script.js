@@ -8,13 +8,6 @@ const dropdownContent = document.getElementById('dropdown-content');
 if (hamburger && dropdownContent) {
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
-        // On mobile, position dropdown flush below the header
-        if (window.innerWidth <= 768) {
-            const headerBottom = document.getElementById('header').getBoundingClientRect().bottom;
-            dropdownContent.style.top = headerBottom + 'px';
-        } else {
-            dropdownContent.style.top = '';
-        }
         dropdownContent.classList.toggle('active');
         hamburger.classList.toggle('active');
     });
