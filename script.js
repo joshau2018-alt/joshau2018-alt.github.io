@@ -4,6 +4,7 @@
 
 const hamburger = document.getElementById('hamburger');
 const dropdownContent = document.getElementById('dropdown-content');
+const header = document.getElementById('header');
 
 if (hamburger && dropdownContent) {
     hamburger.addEventListener('click', (e) => {
@@ -29,12 +30,51 @@ if (hamburger && dropdownContent) {
     });
 }
 
+// ============================================
+// POSITION DROPDOWN UNDER HEADER
+// ============================================
+
+function updateDropdownPosition() {
+    if (header && dropdownContent) {
+        const headerRect = header.getBoundingClientRect();
+        const headerHeight = header.offsetHeight;
+        
+        // Get main-content width to match dropdown width
+        const mainContent = document.querySelector('.main-content');
+        let dropdownWidth = window.innerWidth; // Default to full viewport width
+        let dropdownLeft = 0;
+        
+        if (mainContent) {
+            dropdownWidth = mainContent.offsetWidth;
+            const mainContentRect = mainContent.getBoundingClientRect();
+            dropdownLeft = mainContentRect.left;
+        } else {
+            // Fallback: center based on viewport
+            dropdownLeft = (window.innerWidth - dropdownWidth) / 2;
+        }
+        
+        // Set dropdown width and position to match main-content
+        dropdownContent.style.width = dropdownWidth + 'px';
+        dropdownContent.style.left = dropdownLeft + 'px';
+        dropdownContent.style.transform = 'none';
+        
+        // Position dropdown directly below header
+        dropdownContent.style.position = 'fixed';
+        dropdownContent.style.top = (headerRect.top + headerHeight) + 'px';
+    }
+}
+
+// Update on load, resize, and scroll
+window.addEventListener('load', updateDropdownPosition);
+window.addEventListener('resize', updateDropdownPosition);
+window.addEventListener('scroll', updateDropdownPosition);
+updateDropdownPosition();
+
 
 // ============================================
 // HEADER SCROLL EFFECT
 // ============================================
 
-const header = document.getElementById('header');
 let lastScrollY = 0;
 
 window.addEventListener('scroll', () => {

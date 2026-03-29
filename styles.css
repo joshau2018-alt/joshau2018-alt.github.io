@@ -58,7 +58,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     z-index: -1;
 }
 .header-container { 
-    max-width: 100%; 
+    max-width: 1200px; 
     margin: 0 auto; 
     padding: 0.75rem var(--space-lg); 
     display: flex; 
@@ -68,6 +68,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     height: auto;
     position: relative; 
     z-index: 1;
+    width: 100%;
 }
 .logo-image { 
     width: 60px; 
@@ -99,18 +100,19 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 }
 
 .nav-menu { 
-    position: relative; 
+    position: static; 
     display: flex; 
     align-items: center;
     flex-shrink: 0;
 }
 .dropdown-btn { display: none; }
 .dropdown-content { 
-    position: absolute; 
-    top: 100%; 
-    left: 0;
-    right: 0;
-    width: 100%;
+    position: fixed; 
+    top: var(--dropdown-top, 100%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    max-width: 100%;
     background: rgba(0, 0, 0, 0.8);
     border: none; 
     border-radius: 0; 
@@ -473,13 +475,15 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     background-image: url("Images/krzysztof-kowalik-ciyfSzBmaKU-unsplash.jpg"); 
     background-color: rgba(0, 0, 0, 0.67); 
     background-blend-mode: multiply; 
-    background-size: cover; 
+    background-size: cover;
+    background-attachment: fixed;
     border-top: 2px solid var(--border); 
     padding: var(--space-xl) var(--space-lg); 
-    margin-top: var(--space-xl); 
+    margin-top: var(--space-xl);
+    width: 100%;
 }
 .footer-content { 
-    max-width: 100%; 
+    max-width: 1200px; 
     margin: 0 auto; 
     display: flex; 
     flex-direction: column; 
@@ -493,15 +497,12 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     gap: var(--space-lg); 
     align-items: stretch; 
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .footer-left { 
     flex: 0 0 50%; 
     display: flex; 
     min-height: 300px;
-    max-width: 600px;
 }
 .footer-left iframe { 
     width: 100%; 
@@ -514,7 +515,6 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 .footer-center { 
     flex: 1; 
     display: flex;
-    max-width: 600px;
 }
 .footer-center .text-content { 
     width: 100%; 
@@ -525,12 +525,9 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
 .footer-right { 
     width: 100%; 
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 .info-box { 
     width: 100%; 
-    max-width: 1200px;
     background: rgba(255, 255, 255, 0.1); 
     border: 1px solid rgba(255, 255, 255, 0.2); 
     border-radius: var(--radius-lg); 
@@ -709,9 +706,31 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
         max-width: 1200px;
         margin: 0 auto;
     }
+}
 
-    .footer {
+@media (min-width: 1201px) {
+    .banner-img { 
+        background-image: url(Images/banner-notext.png); 
+        background-size: cover; 
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .banner-img::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
         max-width: 1200px;
-        margin: var(--space-xl) auto 0;
+        height: 100%;
+        background-image: url(Images/banner-onlytext.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 }
