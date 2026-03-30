@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — C&C Roadside Assistance</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ============================================
+           ABOUT PAGE STYLES
+           ============================================ */
+
+        .about-main {
+            width: 100%;
+            background-image: url(Images/DarkTire.jpeg);
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .about-hero {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            padding: 5vw 0 4vw;
+            text-align: center;
+        }
+
+        .about-hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            font-style: italic;
+            background: linear-gradient(135deg, red 0%, maroon 50%, red 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.05em;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            margin-bottom: var(--space-sm);
+        }
+
+        .about-hero p {
+            color: rgba(255,255,255,0.85);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           INFO CARDS SECTION
+           ============================================ */
+
+        .about-cards-section {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: var(--space-2xl) var(--space-lg);
+        }
+
+        .about-cards-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            transition: transform 300ms ease, box-shadow 300ms ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.5);
+        }
+
+        /* Red top accent bar */
+        .info-card-accent {
+            height: 5px;
+            background: linear-gradient(90deg, maroon, red, maroon);
+        }
+
+        .info-card-header {
+            padding: var(--space-lg) var(--space-lg) var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, maroon, red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+
+        .info-card-title {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 900;
+            font-style: italic;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.2;
+        }
+
+        .info-card-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+            font-style: normal;
+            margin-top: 2px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .info-card-body {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        /* CEO photo placeholder */
+        .ceo-photo {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed rgba(255,255,255,0.15);
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+            gap: 0.5rem;
+            overflow: hidden;
+        }
+
+        .ceo-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ceo-photo-placeholder {
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .info-card-text {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.97rem;
+            line-height: 1.75;
+        }
+
+        .info-card-text p + p {
+            margin-top: var(--space-sm);
+        }
+
+        /* Stat chips */
+        .stat-row {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 99px;
+            padding: 0.4rem 1rem;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stat-chip strong {
+            color: #ff4444;
+        }
+
+        /* Founding timeline bar */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: var(--space-xs);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child) .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: -12px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(180,0,0,0.6), rgba(180,0,0,0.1));
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, maroon, red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.5px;
+            margin-top: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-bottom: var(--space-md);
+        }
+
+        .timeline-year {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: red;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* Quote block */
+        .quote-block {
+            background: rgba(139, 0, 0, 0.2);
+            border-left: 3px solid red;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md);
+            font-style: italic;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: var(--space-xs);
+            font-style: normal;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.45);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .about-cards-inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .about-cards-section {
+                padding: var(--space-xl) var(--space-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero {
+                padding: 8vw 0 6vw;
+            }
+
+            .info-card-header {
+                padding: var(--space-md);
+            }
+
+            .info-card-body {
+                padding: var(--space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Horizontal Image Banner -->
+    <section class="top-banner">
+        <div class="banner-img"></div>
+    </section>
+
+    <!-- Header (identical to index.html) -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" style="display:flex; align-items:center; gap:1.5rem; text-decoration:none; flex:1;">
+                <img src="Images/Logo.png" alt="C&C Roadside Assistance Logo" class="logo-image">
+                <div class="company-name">C&C Roadside Assistance</div>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <button class="dropdown-btn">Menu ▼</button>
+                <div class="dropdown-content" id="dropdown-content">
+                    <a href="about.html"><span>About</span></a>
+                    <a href="services.html"><span>Services</span></a>
+                    <a href="reviews.html"><span>Reviews</span></a>
+                    <a href="#contact"><span>Contact</span></a>
+                </div>
+            </nav>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- About Page Main Content -->
+    <main class="about-main">
+
+        <!-- Hero intro -->
+        <section class="about-hero">
+            <div class="about-hero-inner">
+                <h1>Our Story</h1>
+                <p>Built on hard work, trust, and a commitment to getting you back on the road — no matter what.</p>
+            </div>
+        </section>
+
+        <!-- Info Cards -->
+        <section class="about-cards-section">
+            <div class="about-cards-inner">
+
+                <!-- CEO Card -->
+                <div class="info-card">
+                    <div class="info-card-accent"></div>
+                    <div class="info-card-header">
+                        <div class="info-card-icon">👤</div>
+                        <div>
+                            <div class="info-card-title">Meet the CEO</div>
+                            <div class="info-card-subtitle">Leadership &amp; Vision</div>
+                        </div>
+                    </div>
+                    <div class="info-card-body">
+
+                        <!-- Replace src with actual CEO photo path when available -->
+                        <div class="ceo-photo">
+                            <img src="Images/CEO.jpg" alt="CEO of C&C Roadside Assistance"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="ceo-photo-placeholder" style="display:none; flex-direction:column; align-items:center; gap:0.5rem;">
+                                <span style="font-size:3rem;">🪪</span>
+                                <span style="font-size:0.8rem; color:rgba(255,255,255,0.3);">CEO Photo</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <div class="stat-chip"><strong>10+</strong> Years Experience</div>
+                            <div class="stat-chip"><strong>24/7</strong> Availability</div>
+                            <div class="stat-chip">DFW Area</div>
+                        </div>
+
+                        <div class="info-card-text">
+                            <p>With over a decade of hands-on experience in roadside assistance and automotive services, our CEO built C&amp;C from the ground up with a simple mission: treat every stranded driver the way you'd want your own family treated.</p>
+                            <p>Known for showing up fast, being upfront about pricing, and genuinely caring about every customer, the leadership behind C&amp;C sets the tone for everything the company does.</p>
+                        </div>
+
+                        <div class="quote-block">
+                            "We're not just a towing company — we're your neighbor who happens to have the right equipment when you need it most."
+                            <cite>— C&amp;C Roadside Assistance CEO</cite>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Founding Card -->
+                <div class="info-card">
+                    <div class="info-card-accent"></div>
+                    <div class="info-card-header">
+                        <div class="info-card-icon">🏁</div>
+                        <div>
+                            <div class="info-card-title">How We Started</div>
+                            <div class="info-card-subtitle">The Founding Story</div>
+                        </div>
+                    </div>
+                    <div class="info-card-body">
+
+                        <div class="info-card-text">
+                            <p>C&amp;C Roadside Assistance was founded out of a real frustration — watching friends and family get stranded and overcharged by companies that didn't care. We knew there had to be a better way.</p>
+                        </div>
+
+                        <div class="timeline">
+
+                            <div class="timeline-item">
+                                <div class="timeline-line"></div>
+                                <div class="timeline-dot">EST</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-year">The Beginning</div>
+                                    <div class="timeline-title">Founded in the DFW Metroplex</div>
+                                    <div class="timeline-desc">Started with one truck and a commitment to honest, reliable roadside service for the local community.</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-line"></div>
+                                <div class="timeline-dot">↗</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-year">Growth</div>
+                                    <div class="timeline-title">Expanding Our Reach</div>
+                                    <div class="timeline-desc">Word spread fast. Repeat customers and referrals grew the fleet and the reputation across the metroplex.</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot">★</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-year">Today</div>
+                                    <div class="timeline-title">Trusted by the Community</div>
+                                    <div class="timeline-desc">Hundreds of five-star reviews and thousands of drivers helped. Available 24/7, every day of the year.</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="stat-row">
+                            <div class="stat-chip"><strong>1000+</strong> Drivers Helped</div>
+                            <div class="stat-chip"><strong>5★</strong> Rated</div>
+                            <div class="stat-chip">Locally Owned</div>
+                        </div>
+
+                        <div class="quote-block">
+                            "This community gave us a chance when we were just starting out. Everything we do is our way of paying that back."
+                            <cite>— On the founding of C&amp;C</cite>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (identical to index.html) -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-top-shelf">
+                <div class="footer-left">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.9236236361235!2d-97.23517919999999!3d32.82078859999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e79bba32bcafb%3A0x6d2fa548f8aa6785!2sC%26C%20Roadside%20Assistance!5e0!3m2!1sen!2sus!4v1774227491135!5m2!1sen!2sus" 
+                        width="100%"
+                        height="100%"
+                        style="border: none; min-height: 250px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="footer-center">
+                    <div class="text-content footer-text">TEXT</div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="info-box">INFO here</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

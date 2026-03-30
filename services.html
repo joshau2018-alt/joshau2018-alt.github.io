@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — C&C Roadside Assistance</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    /* Minimal page-specific overrides only */
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .truck-photo {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background: rgba(255,255,255,0.04);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .truck-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .truck-photo-icon { font-size: 3rem; opacity: 0.25; }
+    .truck-photo-label {
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.6); /* Increased visibility from 0.25 */
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+    }
+
+    .truck-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: var(--space-xs);
+    }
+
+    .truck-tag {
+        background: rgba(180,0,0,0.4); /* Darkened background for contrast */
+        border: 1px solid rgba(255,60,60,0.6);
+        border-radius: 99px;
+        padding: 0.2rem 0.7rem;
+        font-size: 0.72rem;
+        color: #ffffff; /* Forced to white */
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .pricing-table thead tr {
+        background: linear-gradient(135deg, maroon, rgb(180,0,0));
+    }
+
+    .pricing-table thead th {
+        padding: var(--space-md) var(--space-lg);
+        text-align: left;
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #ffffff; /* Solid white */
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .pricing-table tbody tr {
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        transition: background 200ms ease;
+    }
+
+    .pricing-table tbody tr:nth-child(even) {
+        background: rgba(255,255,255,0.08); /* Increased visibility */
+    }
+
+    .pricing-table tbody tr:hover { background: rgba(255,255,255,0.15); }
+
+    .pricing-table tbody td {
+        padding: var(--space-md) var(--space-lg);
+        font-size: 0.92rem;
+        color: #f0f0f0; /* Bright light-gray for readability */
+        vertical-align: middle;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for legibility */
+    }
+
+    .pricing-table tbody td:first-child { font-weight: 700; color: #fff; }
+
+    .price-badge {
+        display: inline-block;
+        background: rgba(255,0,0,0.3);
+        border: 1px solid rgba(255,100,100,0.5);
+        border-radius: 99px;
+        padding: 0.2rem 0.8rem;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    .time-badge {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 99px;
+        padding: 0.2rem 0.8rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .placeholder-val {
+        color: rgba(255,255,255,0.6); /* Increased from 0.25 */
+        font-style: italic;
+        font-size: 0.82rem;
+    }
+
+    /* Target the general card text specifically */
+    .info-card-text {
+        color: #ffffff !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .info-card-subtitle {
+        color: #ffcccc !important; /* Light red/pink tint to stand out */
+        font-weight: 600;
+    }
+
+    .two-col { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--space-lg); }
+
+    @media (max-width: 900px) {
+        .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+        .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+        .services-grid { grid-template-columns: 1fr; }
+        .pricing-table thead th,
+        .pricing-table tbody td { padding: var(--space-sm) var(--space-md); font-size: 0.8rem; }
+    }
+</style>
+</head>
+<body>
+
+    <!-- Banner -->
+    <section class="top-banner">
+        <div class="banner-img"></div>
+    </section>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" style="display:flex; align-items:center; gap:1.5rem; text-decoration:none; flex:1;">
+                <img src="Images/Logo.png" alt="C&C Roadside Assistance Logo" class="logo-image">
+                <div class="company-name">C&C Roadside Assistance</div>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <button class="dropdown-btn">Menu ▼</button>
+                <div class="dropdown-content" id="dropdown-content">
+                    <a href="about.html"><span>About</span></a>
+                    <a href="services.html"><span>Services</span></a>
+                    <a href="reviews.html"><span>Reviews</span></a>
+                    <a href="#contact"><span>Contact</span></a>
+                </div>
+            </nav>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main style="background-image: url(Images/DarkTire.jpeg); background-attachment: fixed; background-size: cover;">
+
+        <!-- Hero -->
+        <section style="background: rgba(0,0,0,0.65); padding: 5vw 0 4vw; text-align: center;">
+            <div style="max-width: 800px; margin: 0 auto; padding: 0 var(--space-lg);">
+                <h1 style="font-size: clamp(2rem,5vw,3.5rem); font-weight:900; font-style:italic;
+                    background: linear-gradient(135deg, red 0%, maroon 50%, red 100%);
+                    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+                    letter-spacing:0.05em; filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+                    margin-bottom: var(--space-sm);">Our Services</h1>
+                <p style="color:rgba(255,255,255,0.85); font-size:clamp(1rem,2vw,1.2rem); line-height:1.7;">
+                    Professional roadside assistance across the DFW Metroplex — available 24/7, every day of the year.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════
+             THE FLEET
+             ══════════════════════════ -->
+        <section style="background:rgba(0,0,0,0.5); padding:var(--space-2xl) var(--space-lg);">
+            <div style="max-width:1100px; margin:0 auto;">
+
+                <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
+                    <div class="info-card-icon">🚛</div>
+                    <div>
+                        <div class="info-card-title">Our Fleet</div>
+                        <div class="info-card-subtitle">The trucks that get you home</div>
+                    </div>
+                </div>
+
+                <div class="services-grid">
+
+                    <!-- Truck 1 -->
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="truck-photo">
+                            <img src="Images/Truck1.jpg" alt="Truck 1"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; width:100%; height:100%; position:absolute; top:0; left:0;">
+                                <div class="truck-photo-icon">🚛</div>
+                                <div class="truck-photo-label">Truck Photo</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-title">Truck Name / Model</div>
+                            <div class="info-card-subtitle" style="font-style:normal; margin-bottom:var(--space-xs);">Year · Make · Model</div>
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe what this truck is used for, its capacity, and any special equipment it carries.
+                            </div>
+                            <div class="truck-tags">
+                                <span class="truck-tag">Towing</span>
+                                <span class="truck-tag">Flatbed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Truck 2 -->
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="truck-photo">
+                            <img src="Images/Truck2.jpg" alt="Truck 2"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; width:100%; height:100%; position:absolute; top:0; left:0;">
+                                <div class="truck-photo-icon">🚐</div>
+                                <div class="truck-photo-label">Truck Photo</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-title">Truck Name / Model</div>
+                            <div class="info-card-subtitle" style="font-style:normal; margin-bottom:var(--space-xs);">Year · Make · Model</div>
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe what this truck is used for, its capacity, and any special equipment it carries.
+                            </div>
+                            <div class="truck-tags">
+                                <span class="truck-tag">Jump Starts</span>
+                                <span class="truck-tag">Fuel Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Truck 3 -->
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="truck-photo">
+                            <img src="Images/Truck3.jpg" alt="Truck 3"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; width:100%; height:100%; position:absolute; top:0; left:0;">
+                                <div class="truck-photo-icon">🚚</div>
+                                <div class="truck-photo-label">Truck Photo</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-title">Truck Name / Model</div>
+                            <div class="info-card-subtitle" style="font-style:normal; margin-bottom:var(--space-xs);">Year · Make · Model</div>
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe what this truck is used for, its capacity, and any special equipment it carries.
+                            </div>
+                            <div class="truck-tags">
+                                <span class="truck-tag">Heavy Duty</span>
+                                <span class="truck-tag">Winch</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════
+             SERVICES OFFERED
+             ══════════════════════════ -->
+        <section style="background:rgba(0,0,0,0.65); padding:var(--space-2xl) var(--space-lg);">
+            <div style="max-width:1100px; margin:0 auto;">
+
+                <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
+                    <div class="info-card-icon">🔧</div>
+                    <div>
+                        <div class="info-card-title">Services Offered</div>
+                        <div class="info-card-subtitle">What we can do for you</div>
+                    </div>
+                </div>
+
+                <div class="two-col">
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">🚗</div>
+                            <div>
+                                <div class="info-card-title">Towing</div>
+                                <div class="info-card-subtitle">Local &amp; Long Distance</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe the towing service, vehicle types accepted, distance limits, and any specialty towing (flatbed, wheel-lift, etc.).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">🔋</div>
+                            <div>
+                                <div class="info-card-title">Jump Starts</div>
+                                <div class="info-card-subtitle">Dead Battery? No Problem.</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe the jump start service, equipment used, and any battery replacement options offered on-site.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">🛞</div>
+                            <div>
+                                <div class="info-card-title">Tire Changes</div>
+                                <div class="info-card-subtitle">Flat Tire Assistance</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe the tire change service, spare tire requirements, and what happens if no spare is available.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">⛽</div>
+                            <div>
+                                <div class="info-card-title">Fuel Delivery</div>
+                                <div class="info-card-subtitle">Running on Empty</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe the fuel delivery service, fuel types available, and the amount typically delivered per call.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">🔓</div>
+                            <div>
+                                <div class="info-card-title">Lockout Service</div>
+                                <div class="info-card-subtitle">Locked Out of Your Vehicle</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — describe the lockout service, vehicle types supported, and how the process works without damaging the vehicle.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-accent"></div>
+                        <div class="info-card-header">
+                            <div class="info-card-icon">⚙️</div>
+                            <div>
+                                <div class="info-card-title">Additional Service</div>
+                                <div class="info-card-subtitle">Placeholder</div>
+                            </div>
+                        </div>
+                        <div class="info-card-body">
+                            <div class="info-card-text" style="min-height:unset;">
+                                Placeholder — add any additional service such as winching, accident recovery, tire inflation, or mobile battery replacement.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════
+             PRICING & RESPONSE TIMES
+             ══════════════════════════ -->
+        <section style="background:rgba(0,0,0,0.5); padding:var(--space-2xl) var(--space-lg);">
+            <div style="max-width:1100px; margin:0 auto;">
+
+                <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
+                    <div class="info-card-icon">💲</div>
+                    <div>
+                        <div class="info-card-title">Pricing &amp; Response Times</div>
+                        <div class="info-card-subtitle">Transparent rates — no surprises</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-accent"></div>
+                    <div class="info-card-body" style="padding:0;">
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Starting Price</th>
+                                    <th>Avg. Response Time</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Towing (local)</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Towing (long distance)</td>
+                                    <td><span class="price-badge">$XX/mi</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Jump Start</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Tire Change</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Fuel Delivery</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Lockout Service</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                                <tr>
+                                    <td>Additional Service</td>
+                                    <td><span class="price-badge">$XX</span></td>
+                                    <td><span class="time-badge">⏱ XX–XX min</span></td>
+                                    <td class="placeholder-val">Add notes here</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="quote-block" style="margin-top:var(--space-md); color:white" >
+                    Prices shown are starting rates and may vary based on location, vehicle type, and conditions.
+                    All pricing is discussed upfront before any work begins — no hidden fees, ever.
+                    <cite>— C&amp;C Roadside Assistance</cite>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-top-shelf">
+                <div class="footer-left">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.9236236361235!2d-97.23517919999999!3d32.82078859999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e79bba32bcafb%3A0x6d2fa548f8aa6785!2sC%26C%20Roadside%20Assistance!5e0!3m2!1sen!2sus!4v1774227491135!5m2!1sen!2sus"
+                        width="100%" height="100%"
+                        style="border:none; min-height:250px;"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="footer-center">
+                    <div class="text-content footer-text">TEXT</div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="info-box">INFO here</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
