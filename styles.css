@@ -85,18 +85,25 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     z-index: -1;
 }
 .header-container { 
-    max-width: 1200px; 
-    margin: 0 auto; 
+    max-width: 100%;
+    margin: 0; 
     padding: 0.75rem var(--space-lg); 
     display: flex; 
     align-items: center; 
-    justify-content: space-between; 
-    gap: 1.5rem;
     height: auto;
     position: relative; 
     z-index: 1;
     width: 100%;
 }
+
+/* Logo: far left */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
 .logo-image { 
     width: 60px; 
     height: 60px; 
@@ -104,7 +111,11 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     display: block;
     flex-shrink: 0;
 }
+
+/* Company name: takes all remaining space, centered */
 .company-name { 
+    flex: 1;
+    text-align: center;
     font-weight: 900; 
     font-size: 1.75rem; 
     background: linear-gradient(135deg, red 0%, maroon 50%, red 100%);
@@ -112,7 +123,6 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 0.08em; 
-    text-align: center;
     text-shadow: 3px 3px 0px rgba(99, 102, 241, 0.3);
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
     font-style: italic;
@@ -203,6 +213,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     border: none; 
     cursor: pointer; 
     padding: 0.5rem; 
+    flex-shrink: 0;
     width: 40px; 
     height: 40px; 
     position: relative;
