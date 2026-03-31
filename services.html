@@ -38,7 +38,7 @@
     .truck-photo-icon { font-size: 3rem; opacity: 0.25; }
     .truck-photo-label {
         font-size: 0.72rem;
-        color: rgba(255,255,255,0.6); /* Increased visibility from 0.25 */
+        color: rgba(255,255,255,0.6);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-weight: 700;
@@ -46,122 +46,162 @@
 
     .truck-tags {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 0.4rem;
         margin-top: var(--space-xs);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 2px;
     }
 
+    .truck-tags::-webkit-scrollbar { display: none; }
+
     .truck-tag {
-        background: rgba(180,0,0,0.4); /* Darkened background for contrast */
-        border: 1px solid rgba(255,60,60,0.6);
+        background: rgba(160,0,0,0.7);
+        border: 1px solid rgba(255,80,80,0.8);
         border-radius: 99px;
-        padding: 0.2rem 0.7rem;
-        font-size: 0.72rem;
-        color: #ffffff; /* Forced to white */
+        padding: 0.25rem 0.8rem;
+        font-size: 0.75rem;
+        color: #ffffff;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 
-    .pricing-table-wrapper {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        /* Hint that the table scrolls horizontally on small screens */
-    }
-
-    /* Fade hint on the right edge for mobile */
-    @media (max-width: 640px) {
-        .pricing-table-wrapper {
-            position: relative;
-        }
-        .pricing-table-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 32px; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(0,0,0,0.45));
-            pointer-events: none;
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-        }
-    }
-
-    .pricing-table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 520px; /* prevents squishing — table scrolls instead */
-    }
-
-    .pricing-table thead tr {
-        background: linear-gradient(135deg, maroon, rgb(180,0,0));
-    }
-
-    .pricing-table thead th {
-        padding: var(--space-md) var(--space-lg);
-        text-align: left;
-        font-size: 0.82rem;
-        font-weight: 800;
-        color: #ffffff; /* Solid white */
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-    }
-
-    .pricing-table tbody tr {
-        border-bottom: 1px solid rgba(255,255,255,0.15);
-        transition: background 200ms ease;
-    }
-
-    .pricing-table tbody tr:nth-child(even) {
-        background: rgba(255,255,255,0.08); /* Increased visibility */
-    }
-
-    .pricing-table tbody tr:hover { background: rgba(255,255,255,0.15); }
-
-    .pricing-table tbody td {
-        padding: var(--space-md) var(--space-lg);
-        font-size: 0.92rem;
-        color: #f0f0f0; /* Bright light-gray for readability */
-        vertical-align: middle;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for legibility */
-    }
-
-    .pricing-table tbody td:first-child { font-weight: 700; color: #fff; }
-
-    .price-badge {
-        display: inline-block;
-        background: rgba(255,0,0,0.3);
-        border: 1px solid rgba(255,100,100,0.5);
-        border-radius: 99px;
-        padding: 0.2rem 0.8rem;
-        font-size: 0.85rem;
-        font-weight: 800;
-        color: #ffffff;
-    }
-
-    .time-badge {
-        background: rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.3);
-        border-radius: 99px;
-        padding: 0.2rem 0.8rem;
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: #ffffff;
-    }
-
-    .placeholder-val {
-        color: rgba(255,255,255,0.6); /* Increased from 0.25 */
-        font-style: italic;
-        font-size: 0.82rem;
-    }
-
-    /* Target the general card text specifically */
-    .info-card-text {
-        color: #ffffff !important;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    /* ── Info card text overrides for this page ── */
+    .info-card-title {
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
 
     .info-card-subtitle {
-        color: #ffcccc !important; /* Light red/pink tint to stand out */
+        color: #ffb3b3 !important;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .info-card-text {
+        color: #f0f0f0 !important;
+        font-size: 0.97rem !important;
+        line-height: 1.75 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+
+    /* ── Pricing table ── */
+    .pricing-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        border-radius: var(--radius-lg);
+    }
+
+    .pricing-table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 500px;
+    }
+
+    .pricing-table thead tr {
+        background: linear-gradient(135deg, #6b0000, #b00000);
+    }
+
+    .pricing-table thead th {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        white-space: nowrap;
+    }
+
+    .pricing-table tbody tr {
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+        transition: background 200ms ease;
+    }
+
+    .pricing-table tbody tr:nth-child(odd) {
+        background: rgba(0,0,0,0.35);
+    }
+
+    .pricing-table tbody tr:nth-child(even) {
+        background: rgba(255,255,255,0.07);
+    }
+
+    .pricing-table tbody tr:hover { background: rgba(255,255,255,0.13); }
+
+    .pricing-table tbody td {
+        padding: 0.9rem 1.25rem;
+        font-size: 0.95rem;
+        color: #f5f5f5;
+        vertical-align: middle;
+        line-height: 1.4;
+    }
+
+    .pricing-table tbody td:first-child {
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+    }
+
+    .price-badge {
+        display: inline-block;
+        background: rgba(180,0,0,0.75);
+        border: 1px solid rgba(255,120,120,0.7);
+        border-radius: 99px;
+        padding: 0.25rem 0.9rem;
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #ffffff;
+        white-space: nowrap;
+    }
+
+    .time-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.35);
+        border-radius: 99px;
+        padding: 0.25rem 0.9rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+    }
+
+    .placeholder-val {
+        color: rgba(255,255,255,0.7);
+        font-style: italic;
+        font-size: 0.88rem;
+    }
+
+    /* ── Section backgrounds — darker for contrast ── */
+    .section-fleet     { background: rgba(0,0,0,0.72); }
+    .section-services  { background: rgba(0,0,0,0.78); }
+    .section-pricing   { background: rgba(0,0,0,0.72); }
+
+    /* ── Quote block ── */
+    .quote-block {
+        color: rgba(255,255,255,0.82) !important;
+        font-size: 0.92rem;
+        line-height: 1.7;
+        padding: var(--space-md) var(--space-lg);
+        border-left: 3px solid rgba(200,0,0,0.6);
+        background: rgba(0,0,0,0.3);
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        margin-top: var(--space-md);
+    }
+
+    .quote-block cite {
+        display: block;
+        margin-top: 0.5rem;
+        font-style: italic;
+        color: rgba(255,180,180,0.85);
         font-weight: 600;
     }
 
@@ -231,7 +271,7 @@
         <!-- ══════════════════════════
              THE FLEET
              ══════════════════════════ -->
-        <section style="background:rgba(0,0,0,0.5); padding:var(--space-2xl) var(--space-lg);">
+        <section class="section-fleet" style="padding:var(--space-2xl) var(--space-lg);">
             <div style="max-width:1100px; margin:0 auto;">
 
                 <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
@@ -324,7 +364,7 @@
         <!-- ══════════════════════════
              SERVICES OFFERED
              ══════════════════════════ -->
-        <section style="background:rgba(0,0,0,0.65); padding:var(--space-2xl) var(--space-lg);">
+        <section class="section-services" style="padding:var(--space-2xl) var(--space-lg);">
             <div style="max-width:1100px; margin:0 auto;">
 
                 <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
@@ -441,7 +481,7 @@
         <!-- ══════════════════════════
              PRICING & RESPONSE TIMES
              ══════════════════════════ -->
-        <section style="background:rgba(0,0,0,0.5); padding:var(--space-2xl) var(--space-lg);">
+        <section class="section-pricing" style="padding:var(--space-2xl) var(--space-lg);">
             <div style="max-width:1100px; margin:0 auto;">
 
                 <div class="info-card-header" style="background:transparent; border-bottom:1px solid rgba(255,255,255,0.1); padding:0 0 var(--space-md); margin-bottom:var(--space-xl);">
@@ -452,9 +492,9 @@
                     </div>
                 </div>
 
-                <div class="info-card">
+                <div class="info-card" style="overflow: visible;">
                     <div class="info-card-accent"></div>
-                    <div class="info-card-body" style="padding:0;">
+                    <div class="info-card-body" style="padding:0; overflow: hidden; border-radius: 0 0 var(--radius-lg) var(--radius-lg);">
                         <div class="pricing-table-wrapper">
                         <table class="pricing-table">
                             <thead>
@@ -514,7 +554,7 @@
                     </div>
                 </div>
 
-                <div class="quote-block" style="margin-top:var(--space-md); color:white" >
+                <div class="quote-block">
                     Prices shown are starting rates and may vary based on location, vehicle type, and conditions.
                     All pricing is discussed upfront before any work begins — no hidden fees, ever.
                     <cite>— C&amp;C Roadside Assistance</cite>
