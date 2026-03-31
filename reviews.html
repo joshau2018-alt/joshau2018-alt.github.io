@@ -53,6 +53,22 @@
             line-height: 1.7;
         }
 
+        /* ── Half star ── */
+        .half-star {
+            position: relative;
+            display: inline-block;
+            color: rgba(255,255,255,0.25); /* empty half color */
+        }
+        .half-star::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            overflow: hidden;
+            color: yellow;
+        }
+
         /* Star decorations in hero */
         .hero-stars {
             display: flex;
@@ -353,7 +369,7 @@
         <!-- Hero -->
         <section class="reviews-hero">
             <div class="reviews-hero-inner">
-                <div class="hero-stars" style="color: yellow">★★★★⯪ </div>
+                <div class="hero-stars" style="color: yellow">★★★★<span class="half-star">★</span></div>
                 <h1>What Our Customers Say</h1>
                 <p>Real feedback from real drivers. Your experience matters — and your voice helps us serve the DFW community better.</p>
             </div>

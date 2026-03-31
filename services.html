@@ -63,9 +63,33 @@
         letter-spacing: 0.05em;
     }
 
+    .pricing-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        /* Hint that the table scrolls horizontally on small screens */
+    }
+
+    /* Fade hint on the right edge for mobile */
+    @media (max-width: 640px) {
+        .pricing-table-wrapper {
+            position: relative;
+        }
+        .pricing-table-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 32px; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.45));
+            pointer-events: none;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        }
+    }
+
     .pricing-table {
         width: 100%;
         border-collapse: collapse;
+        min-width: 520px; /* prevents squishing — table scrolls instead */
     }
 
     .pricing-table thead tr {
@@ -153,8 +177,6 @@
 
     @media (max-width: 560px) {
         .services-grid { grid-template-columns: 1fr; }
-        .pricing-table thead th,
-        .pricing-table tbody td { padding: var(--space-sm) var(--space-md); font-size: 0.8rem; }
     }
 </style>
 </head>
@@ -433,6 +455,7 @@
                 <div class="info-card">
                     <div class="info-card-accent"></div>
                     <div class="info-card-body" style="padding:0;">
+                        <div class="pricing-table-wrapper">
                         <table class="pricing-table">
                             <thead>
                                 <tr>
@@ -487,6 +510,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
 
