@@ -164,7 +164,7 @@
 
         /* ── Explanation text ── */
         .review-explanation {
-            color: rgba(255,255,255,0.82);
+            color: rgba(255,255,255,0.95);
             font-size: 1rem;
             line-height: 1.8;
         }
@@ -193,7 +193,7 @@
         }
 
         .why-matters p {
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.90);
             font-size: 0.92rem;
             line-height: 1.7;
         }
@@ -211,7 +211,7 @@
             border-radius: 99px;
             padding: 0.5rem 1.1rem;
             font-size: 0.85rem;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.95);
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -257,10 +257,41 @@
         }
 
         .survey-box-desc {
-            color: rgba(255,255,255,0.65);
+            color: rgba(255,255,255,0.90);
             font-size: 0.92rem;
             max-width: 480px;
             line-height: 1.7;
+        }
+
+        /* Google Maps Button Styling */
+        .google-maps-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, maroon, red);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.05rem;
+            padding: 1.2rem 2rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            margin-top: var(--space-md);
+            transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+            box-shadow: 0 8px 24px rgba(180, 0, 0, 0.35);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .google-maps-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(180, 0, 0, 0.5);
+        }
+
+        .google-maps-button:active {
+            transform: translateY(-1px);
         }
 
         /* The actual link — placeholder until URL is added */
@@ -330,6 +361,49 @@
                 gap: 0.5rem;
             }
         }
+
+        /* ── Roadside Survey Component Styling ── */
+        roadside-survey {
+            --text-color: rgba(255, 255, 255, 0.95) !important;
+            --primary-text: rgba(255, 255, 255, 0.95) !important;
+            --secondary-text: rgba(255, 255, 255, 0.85) !important;
+            --foreground: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        /* Ensure all text inside survey is visible */
+        roadside-survey * {
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        roadside-survey input,
+        roadside-survey textarea,
+        roadside-survey select {
+            color: rgba(50, 50, 50, 1) !important;
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        roadside-survey label {
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        /* ── Footer Link Styling ── */
+        .footer-link {
+            color: rgba(255, 255, 255, 0.90);
+            text-decoration: none;
+            transition: color 200ms ease, text-shadow 200ms ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-link:active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
     </style>
 </head>
 <body>
@@ -427,31 +501,29 @@
                             <p>Click the button below to open our customer feedback survey. It only takes a couple of minutes and covers your overall experience, response time, professionalism, and anything else you'd like to share.</p>
                         </div>
 
-                        <!-- ================================================
-                             SURVEY BOX
-                             To activate: replace href="#" with your survey URL
-                             and remove the class "placeholder" from the button.
-                             ================================================ -->
-                        <div class="survey-box">
+                        <!-- Roadside Connect - Survey Component (Separate from Google Maps link) -->
+                        <div class="survey-box" id="survey-container">
                             <div class="survey-icon">📝</div>
                             <div class="survey-box-title">Customer Feedback Survey</div>
                             <div class="survey-box-desc">
                                 Share your experience with C&amp;C Roadside Assistance. Quick, easy, and genuinely appreciated.
                             </div>
 
-                            <!-- Replace href="#" with the real survey URL when ready -->
-                            <a href="#" class="survey-link-btn placeholder" id="survey-btn" target="_blank" rel="noopener noreferrer">
-                                📋 Take the Survey
-                            </a>
-
-                            <div class="survey-placeholder-note" id="survey-note">
-                                Survey link coming soon — check back shortly.
-                            </div>
+                            <!-- Roadside Survey Scripts -->
+                            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/bundles/webcomponents-sd-ce-pf.js"></script>
+                            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/bundles/webcomponents-sd-ce-pf.js.map"></script>
+                            <script type="module" src="https://s3.amazonaws.com/cdn.roadside.io/roadside-survey.js"></script>
+                            <roadside-survey style="color: white" key="a20c984a8caf9bcf34de5393a3d0904c"></roadside-survey>
                         </div>
 
+                        <!-- Google Maps Review Button -->
+                        <a href="https://www.google.com/maps/place/C%26C+Roadside+Assistance/@32.8207886,-97.2351792,15z/data=!4m8!3m7!1s0x864e79bba32bcafb:0x6d2fa548f8aa6785!8m2!3d32.8207886!4d-97.2351792!9m1!1b1!16s%2Fg%2F11c6cx9ksv?hl=en&entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="google-maps-button">
+                            <span>📍 Leave a Google Review</span>
+                        </a>
+
                         <div class="why-matters">
-                            <div class="why-matters-title">Prefer to leave a Google review?</div>
-                            <p>You can also find us directly on Google Maps and leave a review there. Every star helps more drivers in the DFW area discover a roadside service they can count on.</p>
+                            <div class="why-matters-title">Why leave a Google review?</div>
+                            <p>Every star helps more drivers in the DFW area discover a roadside service they can count on.</p>
                         </div>
 
                     </div>
@@ -478,33 +550,46 @@
                     </iframe>
                 </div>
                 <div class="footer-center">
-                    <div class="text-content footer-text">TEXT</div>
+                    <div class="text-content footer-text">
+                        6821 Harmonson Rd, North Richland Hills, TX 76180
+                        <br>
+                        <a href="tel:+18179890793">Call Us: +1(817) 989-0793</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-right">
-                <div class="info-box">INFO here</div>
+                <div class="info-box">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About</a>
+                    <a href="services.html" class="footer-link">Services</a>
+                    <a href="reviews.html" class="footer-link">Reviews</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script>
-        // ================================================
-        // SURVEY LINK ACTIVATOR
-        // Set SURVEY_URL to your real survey link to
-        // automatically enable the button and hide the note.
-        // ================================================
-        const SURVEY_URL = ''; // <-- paste your survey URL here
-
-        if (SURVEY_URL) {
-            const btn = document.getElementById('survey-btn');
-            const note = document.getElementById('survey-note');
-            if (btn) {
-                btn.href = SURVEY_URL;
-                btn.classList.remove('placeholder');
-            }
-            if (note) note.style.display = 'none';
+        // Prevent survey interactions from triggering links
+        const surveyContainer = document.getElementById('survey-container');
+        if (surveyContainer) {
+            surveyContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+            surveyContainer.addEventListener('keydown', (e) => {
+                e.stopPropagation();
+            });
         }
+
+        // Ensure roadside-survey component doesn't trigger parent link
+        document.addEventListener('DOMContentLoaded', () => {
+            const survey = document.querySelector('roadside-survey');
+            if (survey) {
+                survey.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+        });
     </script>
 </body>
 </html>

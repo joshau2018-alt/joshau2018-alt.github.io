@@ -406,7 +406,7 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     box-shadow: var(--shadow-lg);
 }
 
-.text-content.footer-text { min-height: 150px; }
+.text-content.footer-text { min-height: auto; }
 
 /* Read More / Find Out More — large blue with sliding arrow */
 .read-more-btn,
@@ -575,6 +575,60 @@ body { font-family: var(--font-body); background-image: url(Images/DarkTire.jpeg
     display: flex; 
     align-items: center; 
     justify-content: center; 
+}
+
+/* Footer text and address styling */
+.footer-text {
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.footer-text a {
+    color: rgba(255, 255, 255, 0.90);
+    text-decoration: none;
+    transition: color 200ms ease, text-shadow 200ms ease;
+    display: inline-block;
+    margin-top: 0.75rem;
+}
+
+.footer-text a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.footer-text a:active {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Footer link styling in info box */
+.footer-link {
+    color: rgba(255, 255, 255, 0.90);
+    text-decoration: none;
+    transition: color 200ms ease, text-shadow 200ms ease;
+    display: block;
+    padding: 0.4rem 0;
+}
+
+.footer-link:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.footer-link:active {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Footer info box specific styling */
+.info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-box .footer-link {
+    margin: 0;
+    padding: 0.4rem 0;
 }
 
 @media (max-width: 768px) {
