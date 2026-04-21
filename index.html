@@ -5,6 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Responsive Website</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Visibility: short text <960px, full text ≥960px ──
+           Use .text-content prefix to beat .text-content span { display:block }
+           specificity in styles.css (0,2,0 vs 0,1,0)               ── */
+        .text-content .desktop-only { display: none;  }
+        .text-content .mobile-only  { display: block; }
+
+        @media (min-width: 960px) {
+            .text-content .desktop-only { display: block; }
+            .text-content .mobile-only  { display: none;  }
+        }
+
+        /* ── Full-width text section: fill the entire b-image-section ── */
+        .full-width-text-section {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            min-height: unset;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .full-width-text-section .text-content {
+            width: 100%;
+            max-width: 100%;
+            padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+        }
+
+        /* ── Shrink elements at 480px and below ── */
+        @media (max-width: 480px) {
+            .full-width-text-section .text-content {
+                padding: 1.25rem;
+            }
+            .full-width-text-section .text-content b {
+                font-size: 1.35rem;
+                margin-bottom: 0.4rem;
+            }
+            .full-width-text-section .text-content span {
+                font-size: 0.875rem;
+                line-height: 1.5;
+            }
+            .full-width-text-section .read-more-btn {
+                font-size: 0.8rem;
+                padding: 0.45rem 1rem;
+                margin-top: 0.75rem;
+            }
+        }
+
+        /* ── Extra-small devices ≤360px ── */
+        @media (max-width: 360px) {
+            .full-width-text-section .text-content  { padding: 1rem; }
+            .full-width-text-section .text-content b    { font-size: 1.2rem; }
+            .full-width-text-section .text-content span { font-size: 0.82rem; }
+        }
+    </style>
 </head>
 <body>
     
@@ -47,7 +104,9 @@
             </div>
             <div class="hero-right">
                 <div class="text-content">
-                    TEXT
+                    <b>Our Story</b>
+                    <span class="desktop-only">Built on hard work, trust, and a commitment to getting you back on the road — no matter what.</span>
+                    <span class="mobile-only">Built on hard work and trust.</span>
                     <div class="read-more-btn">Read more</div>
                 </div>
             </div>
@@ -55,10 +114,12 @@
 
         <div class="b-image-section">
 
-             <!-- Full Width Text Section -->
+            <!-- Full Width Text Section -->
             <section class="full-width-text-section">
                 <div class="text-content">
-                  TEXT SPANNING THE FULL WIDTH OF THE SCREEN
+                    <b>Services</b>
+                    <span class="desktop-only">Professional roadside assistance across the DFW Metroplex — available 24/7, every day of the year.</span>
+                    <span class="mobile-only">24/7 roadside assistance for the DFW area.</span>
                     <div class="read-more-btn">Read more</div>
                 </div>
             </section>
@@ -70,7 +131,9 @@
         <section class="bottom-content-section">
             <div class="bottom-content-left">
                 <div class="text-content">
-                    TEXT
+                    <b>Reviews</b>
+                    <span class="desktop-only">Real feedback from real drivers. Your experience matters — and your voice helps us serve the DFW community better.</span>
+                    <span class="mobile-only">Real feedback from real drivers.</span>
                     <div class="read-more-btn">Read more</div>
                 </div>
             </div>
