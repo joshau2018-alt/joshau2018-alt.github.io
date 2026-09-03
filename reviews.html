@@ -362,28 +362,157 @@
             }
         }
 
-        /* ── Roadside Survey Component Styling ── */
-        roadside-survey {
-            --text-color: rgba(255, 255, 255, 0.95) !important;
-            --primary-text: rgba(255, 255, 255, 0.95) !important;
-            --secondary-text: rgba(255, 255, 255, 0.85) !important;
-            --foreground: rgba(255, 255, 255, 0.95) !important;
+        /* ── Reviews carousel (replaces survey embed) ── */
+        .reviews-carousel {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            gap: var(--space-sm);
         }
 
-        /* Ensure all text inside survey is visible */
-        roadside-survey * {
-            color: rgba(255, 255, 255, 0.95) !important;
+        .review-arrow {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            align-self: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 200ms ease, transform 200ms ease, border-color 200ms ease;
         }
 
-        roadside-survey input,
-        roadside-survey textarea,
-        roadside-survey select {
-            color: rgba(50, 50, 50, 1) !important;
-            background-color: rgba(255, 255, 255, 0.95) !important;
+        .review-arrow:hover {
+            background: linear-gradient(135deg, maroon, red);
+            border-color: transparent;
+            transform: scale(1.08);
         }
 
-        roadside-survey label {
-            color: rgba(255, 255, 255, 0.95) !important;
+        .review-arrow:active {
+            transform: scale(0.96);
+        }
+
+        .reviews-carousel-track {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 560px) {
+            .review-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            .reviews-carousel {
+                gap: 0.5rem;
+            }
+        }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            gap: var(--space-md);
+            opacity: 0;
+            transform: translateX(12px);
+            transition: opacity 400ms ease, transform 400ms ease;
+        }
+
+        .review-item.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .review-item-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.25);
+            background: linear-gradient(135deg, maroon, red);
+        }
+
+        .review-item-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .review-item-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            min-width: 0;
+        }
+
+        .review-item-top {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .review-item-name {
+            font-weight: 800;
+            color: #fff;
+            font-size: 1.05rem;
+        }
+
+        .review-item-date {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        .review-item-stars {
+            color: yellow;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-item-text {
+            color: rgba(255,255,255,0.92);
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+
+        /* Carousel dots */
+        .review-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: var(--space-md);
+        }
+
+        .review-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 200ms ease, transform 200ms ease;
+        }
+
+        .review-dot.active {
+            background: red;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 480px) {
+            .review-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
         }
 
         /* ── Footer Link Styling ── */
@@ -498,23 +627,18 @@
                     <div class="review-card-body">
 
                         <div class="review-explanation">
-                            <p>Click the button below to open our customer feedback survey. It only takes a couple of minutes and covers your overall experience, response time, professionalism, and anything else you'd like to share.</p>
+                            <p>Here's what real customers have said about their experience with us. If you'd like to add your own, leave a review on Google using the button below.</p>
                         </div>
 
-                        <!-- Roadside Connect - Survey Component (Separate from Google Maps link) -->
-                        <div class="survey-box" id="survey-container">
-                            <div class="survey-icon">📝</div>
-                            <div class="survey-box-title">Customer Feedback Survey</div>
-                            <div class="survey-box-desc">
-                                Share your experience with C&amp;C Roadside Assistance. Quick, easy, and genuinely appreciated.
+                        <!-- Reviews Carousel -->
+                        <div class="reviews-carousel" id="reviews-carousel">
+                            <button class="review-arrow" id="review-prev" aria-label="Previous review">‹</button>
+                            <div class="reviews-carousel-track" id="reviews-track">
+                                <!-- Slide is injected by JS from the REVIEWS_DATA array -->
                             </div>
-
-                            <!-- Roadside Survey Scripts -->
-                            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/bundles/webcomponents-sd-ce-pf.js"></script>
-                            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/bundles/webcomponents-sd-ce-pf.js.map"></script>
-                            <script type="module" src="https://s3.amazonaws.com/cdn.roadside.io/roadside-survey.js"></script>
-                            <roadside-survey style="color: white" key="a20c984a8caf9bcf34de5393a3d0904c"></roadside-survey>
+                            <button class="review-arrow" id="review-next" aria-label="Next review">›</button>
                         </div>
+                        <div class="review-dots" id="review-dots"></div>
 
                         <!-- Google Maps Review Button -->
                         <a href="https://www.google.com/maps/place/C%26C+Roadside+Assistance/@32.8207886,-97.2351792,15z/data=!4m8!3m7!1s0x864e79bba32bcafb:0x6d2fa548f8aa6785!8m2!3d32.8207886!4d-97.2351792!9m1!1b1!16s%2Fg%2F11c6cx9ksv?hl=en&entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="google-maps-button">
@@ -570,26 +694,154 @@
 
     <script src="script.js"></script>
     <script>
-        // Prevent survey interactions from triggering links
-        const surveyContainer = document.getElementById('survey-container');
-        if (surveyContainer) {
-            surveyContainer.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-            surveyContainer.addEventListener('keydown', (e) => {
-                e.stopPropagation();
-            });
-        }
+        // ============================================
+        // REVIEWS CAROUSEL
+        // ------------------------------------------------
+        // Each entry mirrors the shape of a Google Places
+        // "review" object (author_name, rating, relative_time_description,
+        // text, profile_photo_url) so this array can be swapped for a
+        // live fetch once a Google Places API key + backend proxy is set up:
+        //   GET /maps/api/place/details/json?place_id=...&fields=reviews&key=YOUR_KEY
+        // For now, profile_photo_url points to placeholder avatar images.
+        // ============================================
+        // REVIEWS_DATA is ordered newest → oldest. When swapping in live
+        // Google Places data, sort by review.time (descending) before assigning.
+        const REVIEWS_DATA = [
+            {
+                author_name: "James M.",
+                rating: 5,
+                relative_time_description: "3 days ago",
+                text: "Blew a tire on 820 at 11pm and they had someone out to me in under 30 minutes. Professional, fast, and fair pricing. Couldn't ask for better service.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=James+M&background=8b0000&color=fff&size=128"
+            },
+            {
+                author_name: "Sarah R.",
+                rating: 5,
+                relative_time_description: "3 weeks ago",
+                text: "Locked my keys in the car right before work. The technician was friendly, quick, and didn't damage anything. Highly recommend to anyone in the DFW area.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=Sarah+R&background=8b0000&color=fff&size=128"
+            },
+            {
+                author_name: "Derek T.",
+                rating: 5,
+                relative_time_description: "1 month ago",
+                text: "Dead battery on a Sunday morning and I figured I'd be stuck for hours. Not the case — they showed up right on time and had me back on the road in minutes.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=Derek+T&background=8b0000&color=fff&size=128"
+            },
+            {
+                author_name: "Angela L.",
+                rating: 4,
+                relative_time_description: "2 months ago",
+                text: "Great communication throughout — they called ahead, gave an honest ETA, and stuck to it. Towing was smooth and the driver was courteous the whole time.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=Angela+L&background=8b0000&color=fff&size=128"
+            },
+            {
+                author_name: "Marcus B.",
+                rating: 5,
+                relative_time_description: "4 months ago",
+                text: "Ran out of gas on 35W during rush hour and was expecting a long wait. They got to me faster than I thought possible and got me back on the road with no hassle.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=Marcus+B&background=8b0000&color=fff&size=128"
+            },
+            {
+                author_name: "Priya K.",
+                rating: 5,
+                relative_time_description: "6 months ago",
+                text: "Needed a tow after an accident and they were incredibly kind and patient while I was shaken up. Handled everything smoothly and explained each step along the way.",
+                profile_photo_url: "https://ui-avatars.com/api/?name=Priya+K&background=8b0000&color=fff&size=128"
+            }
+        ];
 
-        // Ensure roadside-survey component doesn't trigger parent link
-        document.addEventListener('DOMContentLoaded', () => {
-            const survey = document.querySelector('roadside-survey');
-            if (survey) {
-                survey.addEventListener('click', (e) => {
-                    e.stopPropagation();
+        (function initReviewsCarousel() {
+            const track = document.getElementById('reviews-track');
+            const dotsWrap = document.getElementById('review-dots');
+            const prevBtn = document.getElementById('review-prev');
+            const nextBtn = document.getElementById('review-next');
+            if (!track || !dotsWrap || !REVIEWS_DATA.length) return;
+
+            let current = 0;
+            let timer = null;
+            const AUTO_MS = 6000;
+
+            function starString(rating) {
+                const full = Math.round(rating);
+                return '★'.repeat(full) + '☆'.repeat(5 - full);
+            }
+
+            function render(index) {
+                const r = REVIEWS_DATA[index];
+                track.innerHTML = `
+                    <div class="review-item active">
+                        <div class="review-item-avatar">
+                            <img src="${r.profile_photo_url}" alt="${r.author_name}'s profile photo" referrerpolicy="no-referrer">
+                        </div>
+                        <div class="review-item-main">
+                            <div class="review-item-top">
+                                <span class="review-item-name">${r.author_name}</span>
+                                <span class="review-item-stars">${starString(r.rating)}</span>
+                                <span class="review-item-date">${r.relative_time_description}</span>
+                            </div>
+                            <div class="review-item-text">${r.text}</div>
+                        </div>
+                    </div>
+                `;
+
+                dotsWrap.querySelectorAll('.review-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
                 });
             }
-        });
+
+            function goTo(index) {
+                current = (index + REVIEWS_DATA.length) % REVIEWS_DATA.length;
+                render(current);
+            }
+
+            function next() {
+                goTo(current + 1);
+            }
+
+            function prev() {
+                goTo(current - 1);
+            }
+
+            function startAuto() {
+                stopAuto();
+                timer = setInterval(next, AUTO_MS);
+            }
+
+            function stopAuto() {
+                if (timer) clearInterval(timer);
+            }
+
+            // Build dots
+            REVIEWS_DATA.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'review-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+                dot.addEventListener('click', () => {
+                    goTo(i);
+                    startAuto(); // reset the timer after manual navigation
+                });
+                dotsWrap.appendChild(dot);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prev();
+                startAuto();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                next();
+                startAuto();
+            });
+
+            render(0);
+            startAuto();
+
+            // Pause auto-cycling while the user is interacting with this section
+            const carousel = document.getElementById('reviews-carousel');
+            carousel.addEventListener('mouseenter', stopAuto);
+            carousel.addEventListener('mouseleave', startAuto);
+        })();
     </script>
 </body>
 </html>
